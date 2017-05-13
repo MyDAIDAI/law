@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="/law/public/static/css/common.css">
+	<link rel="stylesheet" type="text/css" href="/law/public/static/css/show.css">
+	<link rel="stylesheet" href="/law/public/static/bootstrap/bootstrap.min.css" />
+
+</head>
+<body>
+	 <header style="width: 100%">
+                        <span><a href="/law/index/" style="color: white">法律小助手</a></span>
+
+             <form action="/law/index/index/show" method="get" style="display: inline;">
+               <div>
+                    <input type="text" placeholder="请输入关键词" name="input" id="input" value={$value}>
+                    <button id="queryBtn" style="cursor:pointer;">查询</button>
+                </div>
+            </form>
+            <nav>
+            	 <span><a href="/law/lawbbs">论坛</a></span>
+                <!-- <span><a href="/law/user/login/index">登陆</a></span> -->
+                <!-- <span><a href="/law/user/register/index">注册</a></span> -->
+                <span style=" background-color: transparent;">
+                    <a style="color: #369bd6; border: 1px solid  #369bd6;border-radius: 0px;padding: 8px;" href="/law/admin/login/index">管理员登陆</a>
+                </span>
+            </nav>
+    </header>
+	<main style="color: black;height: auto;padding:120px 30px;">
+		<h3>检索结果</h3>
+		<h4>一共有{$count}条记录</h4>
+	    {volist name="list" id="law" key="k"}
+	    <div class="law-list">
+		    <div class="law-name">
+		    	<span>
+		    	   {$k}、
+	            </span>
+		    	<a style="font-size: 1.2em" href="/law/index/index/descript?lawName={$law->law_title}">{$law->law_title}</a>
+		    </div>
+		    <div class="law-descript">
+		    	<span>{$law->law_unit}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+		    	<span>{$law->law_number}</span>&nbsp;&nbsp;
+		    	<span>{$law->law_show}</span>
+		    	<br>
+		    	<span>{$law->law_start}</span>&nbsp;&nbsp;&nbsp;
+		    	<span>{$law->law_end}</span>&nbsp;&nbsp;&nbsp;
+		    	<span>{$law->law_type}</span>
+		    </div>
+		    <hr style="border : 1px dashed #ccc;" />
+	    </div>
+	    {/volist}
+	    {$list->render()}
+	</main>
+	<script src='/law/public/static/js/util.js'></script>
+</body>
+</html>

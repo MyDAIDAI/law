@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>法律小助手</title>
+      <link rel="stylesheet" href="/law/public/static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/law/public/static/css/common.css">
+    <link rel="stylesheet" href="/law/public/static/css/admin.css">
+    <link rel="stylesheet" href="/law/public/static/bootstrap/bootstrap.min.css" />
+
+</head>
+<body>
+        <header>
+                       <span><a href="/law/index/" style="color: white">法律小助手</a></span>
+
+            <nav>
+                <label style="color: black">亲爱的,{$adminname}</label>
+                  <span style="margin-left: 10px;"><a href="/law/index/index/index">退出</a></span>
+            </nav>
+        </header>
+        <div class="main" style="background-color: transparent">
+            <aside>
+                <div style="background-color: white;padding: 20px 0;text-align: center;">系统管理</div>
+                <ul>
+                    <li><a href="/law/admin/main/user?adminname={$adminname}" title="">用户管理</a></li>
+                    <!--<li><a href="/law/admin/main/addUser?adminname={$adminname}" title="">添加用户</a></li>-->
+                    <li><a href="/law/admin/main/law?adminname={$adminname}" title="">法律管理</a></li>
+                    <!--<li><a href="/law/admin/main/addLaw?adminname={$adminname}" title="">添加法律</a></li>-->
+                </ul>
+            </aside>
+            <main style="height: auto;padding-left: 20px;">
+                <h4>一共有{$count}条记录</h4>
+                {volist name="list" id="law" key="k"}
+                <div class="law-list">
+                    <div class="law-name" style="font-size: 1.2em">
+                        <span>
+                           {$k}、
+                        </span>
+                        <a href="/law/index/index/descript?lawName={$law->law_title}">{$law->law_title}</a>
+                    </div>
+                    <div class="law-descript">
+                        <span>{$law->law_unit}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span>{$law->law_number}</span>&nbsp;&nbsp;
+                        <span>{$law->law_show}</span>
+                        <br>
+                        <span>{$law->law_start}</span>&nbsp;&nbsp;&nbsp;
+                        <span>{$law->law_end}</span>&nbsp;&nbsp;&nbsp;
+                        <span>{$law->law_type}</span>
+                        <button style="margin-left: 20px;" class="delete">删除</button>
+                    </div>
+                    <hr style="border : 1px dashed #ccc;" />
+                </div>
+                {/volist}
+                {$list->render()}
+            </main>
+        </div>
+        <script src='/law/public/static/js/util.js'></script>
+        <script src='/law/public/static/js/law.js'></script>
+</body>
+</html>

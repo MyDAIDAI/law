@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>法律小助手</title>
+    <link rel="stylesheet" href="/law/public/static/css/common.css">
+    <link rel="stylesheet" href="/law/public/static/css/index.css">
+    <link rel="stylesheet" href="/law/public/static/css/font-awesome.min.css">
+</head>
+<body>
+        <header>
+            <span>法律小助手</span>
+            <nav>
+                <span style="background-color: transparent;"><a href="/law/user/user/main?username={$username}" style="font-size: 1.2em;color: black">亲爱的，{$username}</a></span>
+            </nav>
+        </header>
+        <main>
+            <h1>欢迎来到法律小助手</h1>
+            <form action="/law/index/index/show" method="get">
+               <div>
+                    <input type="text" placeholder="请输入关键词" name="input" id="input">
+                    <button id="queryBtn" style="cursor:pointer;">查询</button>
+                </div>
+            </form>
+        </main>
+        <script src='/law/public/static/js/index.js'></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>法律小助手</title>
+      <link rel="stylesheet" href="/law/public/static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/law/public/static/css/common.css">
+    <link rel="stylesheet" href="/law/public/static/css/admin.css">
+
+</head>
+<body>
+        <header>
+            <span>法律小助手</span>
+            <nav>
+                <label style="color: black">亲爱的,{$adminname}</label>
+                <span style="margin-left: 10px;"><a href="/law/index/index/index">退出</a></span>
+            </nav>
+        </header>
+        <div class="main">
+            <aside>
+                <div>系统管理</div>
+                <ul>
+                    <li><a href="/law/user/user/my?adminname={$adminname}" title="">我的资料</a></li>
+                    <li><a href="/law/admin/main/addUser?adminname={$adminname}" title="">修改密码</a></li>
+                </ul>
+            </aside>
+            <main>
+                <h1 style="color: black;font-size: 2em">欢迎来到法律小助手</h1>
+            </main>
+        </div>
+        <script src='/law/public/static/js/index.js'></script>
+</body>
+</html>

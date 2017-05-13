@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎登陆</title>
+    <link rel="stylesheet" href="/law/public/static/css/common.css">
+    <link rel="stylesheet" href="/law/public/static/css/font-awesome.min.css">
+</head>
+<body style="background: white">
+        <header>
+            <span>法律小助手</span>
+             <nav>
+                <span><a href="/law/user/login/index">登陆</a></span>
+                <span style=" background-color: transparent;">
+                    <a style="color: #369bd6; border: 1px solid  #369bd6;border-radius: 0px;padding: 8px;" href="/law/register/register/register">管理员登陆</a>
+                </span>
+            </nav>
+        </header>
+        <main>
+             <div class="container">
+            <div class="container-body">
+                <h2>欢迎注册</h2>
+                <hr>
+                <div class="form">
+                    <div class="message-list">
+                        <label for="userName">用户名</label>
+                        <input type="text" id="userName" placeholder="请输入用户名" name="username">
+                        <i class="icon-asterisk" id="nameWarn"></i>
+                    </div>
+                    <div class="tips" id="nameTips"><span></span></div>
+                    <div class="message-list">
+                        <label for="userPass">密码</label>
+                        <input type="password" id="userPass" placeholder="请输入密码" name=userpass>
+                        <i class="icon-asterisk" id="passWarn"></i>
+                    </div>
+                    <div class="tips" id="passTips"><span></span></div>
+                    <div class="message-list">
+                        <label for="userPassAgain">确认密码</label>
+                        <input type="password" id="userPassAgain" placeholder="请再次输入密码">
+                        <i class="icon-asterisk" id="passAgaWarn"></i>
+                    </div>
+                    <div class="tips" id="passAgaTips"><span></span></div>
+                    <div class="message-list">
+                        <label for="userEmail">邮箱</label>
+                        <input type="text" id="userEmail" placeholder="请输入邮箱" name="useremail">
+                        <i class="icon-asterisk" id="emailWarn"></i>
+                    </div>
+                    <div class="tips" id="emailTips"><span></span></div>
+                    <div class="message-list">
+                        <label for="isLawer">是否为律师</label>
+                        <label class="radio" ><input type="radio" name="isLawer" value="律师">是</label>
+                        <label class="radio" ><input type="radio" name="isLawer" value="普通">否</label>
+                         <i  id="roleWarn"></i>
+                    </div>
+                    <div class="tips" id="roleTips"><span></span></div>
+                    <div class="message-list">
+                        <div id="showInfo" style="color: black"></div>
+                        <button id="register">注册</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </main>
+        <script src='/law/public/static/js/util.js'></script>
+        <script src='/law/public/static/js/register.js'></script>
+</body>
+</html>

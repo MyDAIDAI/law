@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>法律小助手</title>
+      <link rel="stylesheet" href="/law/public/static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/law/public/static/css/common.css">
+    <link rel="stylesheet" href="/law/public/static/css/admin.css">
+    <link rel="stylesheet" href="/law/public/static/bootstrap/bootstrap.min.css" />
+
+</head>
+<body>
+        <header>
+                        <span><a href="/law/index/" style="color: white">法律小助手</a></span>
+
+            <nav>
+                <label style="color: black">亲爱的,{$adminname}</label>
+                  <span style="margin-left: 10px;"><a href="/law/index/index/index">退出</a></span>
+            </nav>
+        </header>
+        <div class="main" style="background-color: transparent">
+            <aside>
+                <div style="padding: 20px 0;text-align: center;">系统管理</div>
+                <ul>
+                    <li><a href="/law/admin/main/user?adminname={$adminname}" title="">用户管理</a></li>
+                    <!--<li><a href="/law/admin/main/addUser?adminname={$adminname}" title="">添加用户</a></li>-->
+                    <li><a href="/law/admin/main/law?adminname={$adminname}" title="">法律管理</a></li>
+                    <!--<li><a href="/law/admin/main/addLaw?adminname={$adminname}" title="">添加法律</a></li>-->
+                </ul>
+            </aside>
+            <main style="height: auto;padding-left: 20px;">
+                <h4>一共有{$count}条记录</h4>
+                {volist name="list" id="user" key="k"}
+                <div class="list" style="padding:5px;">
+                    <div class="descript" style="padding:0">
+                        <span>
+                           {$k}、
+                        </span>
+                        <span class="username">[用户名]:<label>{$user->username}</label>
+                        </span>
+                        <span style="margin-left: 10px;">[用户邮箱]:{$user->email}</span>
+                        <button style="margin-left: 20px;" class="delete">删除</button>
+                    </div>
+                    <hr style="border : 1px dashed #ccc;" />
+                </div>
+                {/volist}
+            </main>
+        </div>
+        <script src='/law/public/static/js/util.js'></script>
+        <script src='/law/public/static/js/user.js'></script>
+</body>
+</html>

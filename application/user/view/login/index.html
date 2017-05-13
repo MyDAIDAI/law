@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎登陆</title>
+    <link rel="stylesheet" href="/law/public/static/css/common.css">
+    <link rel="stylesheet" href="/law/public/static/css/login.css">
+     <link rel="stylesheet" href="/law/public/static/css/font-awesome.min.css">
+</head>
+<body style="background: white">
+        <header>
+            <span>法律小助手</span>
+             <nav>
+                <span><a href="/law/user/register/index">注册</a></span>
+                <span style=" background-color: transparent;">
+                    <a style="color: #369bd6; border: 1px solid  #369bd6;border-radius: 0px;padding: 8px;" href="/law/admin/login/index">管理员登陆</a>
+                </span>
+            </nav>
+        </header>
+        <main>
+            
+            <div class="container">
+            <div class="container-body">
+               <h2>欢迎来到法律小助手，请登陆</h2>
+                <hr>
+                <div class="form">
+                  <!-- <form action="/law/user/login/login" method="get" accept-charset="utf-8"> -->
+                     <div class="message-list">
+                        <i class="icon-2x icon-user" style="width: 32px"></i>
+                        <input type="text" id="userName" placeholder="用户名" name="username">
+                        <i class="icon-tips" id="nameWarn" ></i>
+                    </div>
+                    <div class="tips" id="nameTips"><span></span></div>
+                    <div class="message-list">
+                        <i class="icon-2x icon-key"></i>
+                        <input type="password" id="userPass" placeholder="密码" name="userpass">
+                        <i class="icon-tips" id="passWarn"></i>
+                    </div>
+                    <div class="tips" id="passTips"><span></span></div>
+                    <div class="message-list">
+                        <div id="showInfo" style="color: black"></div>
+                        <button id="loginBtn">登录</button>
+                    </div>
+                    <div class="message-list">
+                        <!-- <a href="findPass.html" id="forgetPass">忘记密码？</a> -->
+                    </div>
+                 <!-- </form> -->
+                </div>
+                </div>
+            </div>
+        </div>
+        </main>
+        <script src='/law/public/static/js/util.js'></script>
+        <script src='/law/public/static/js/login.js'></script>
+</body>
+</html>
