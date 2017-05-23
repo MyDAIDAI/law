@@ -2,47 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>法律小助手</title>
       <link rel="stylesheet" href="/law/public/static/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/law/public/static/css/common.css">
-    <link rel="stylesheet" href="/law/public/static/css/index.css">
+    <!-- <link rel="stylesheet" href="/law/public/static/css/common.css"> -->
+    <!-- <link rel="stylesheet" href="/law/public/static/css/index.css"> -->
+    <link rel="stylesheet" href="/law/public/static/bootstrap/css/bootstrap.css">
+    <style>
+        #mainArea{
+                width: 50%;
+                margin: 0 auto;
+            }
+        @media screen and (max-device-width:750px){
+            #mainArea{
+                width: 80%;
+            }
+        }
+    </style>
 
 </head>
-<body>
-        <header>
-            <span><a href="/law/index/" style="color: white">法律小助手</a></span>
-            <nav>
-                <span><a href="/law/lawbbs">论坛</a></span>
-                <span style=" background-color: transparent;">
-                    <a style="color: #369bd6; border: 1px solid  #369bd6;border-radius: 0px;padding: 8px;" href="/law/admin/login/index">管理员登陆</a>
-                </span>
-            </nav>
-        </header>
-        <main style="height: 100%">
-            <h1>欢迎来到法律小助手</h1>
-            <form action="/law/index/index/show" method="get" accept-charset="utf-8">
-               <div>
-                    <input type="text" placeholder="请输入关键词" name="input" id="input">
-                    <button id="queryBtn" style="cursor:pointer;">查询</button>
-                </div>
-            </form>
-            <div style="width: 45%;padding:20px 0;margin:50px auto 0;border:0px solid #ccc;">
-                 <h2 style="text-align: center;font-size: 1.2em;font-weight: bolder;color: black;padding: 10px;">国家法律法规</h2>
-                 <hr style="border : 1px dashed #ccc;" />
-                {volist name="list" id="law" key="k"}
-                <div style="width: 100%;margin:0 auto">
-                    <div style="width: 100%;text-align: center;padding-top: 5px;">
-                        <a href="/law/index/index/descript?lawName={$law->law_title}">{$law->law_title}</a>
+<body style="padding-top: 20px;">
+
+    <div class="container">
+        <div class="row">
+            <header style="padding: 10px;">
+                <nav>
+                    <!-- <a href="/law/index/" style="font-size: 1.6em">法律小助手</a></span> -->
+                    <a style="margin-left: 20px;" class="btn btn-primary pull-right" href="/law/admin/login/index">管理员登陆</a>
+                    <a class="btn btn-success pull-right" href="/law/lawbbs">论坛</a>
+                </nav>
+            </header>
+        </div>
+         <div class="row" style="margin-top: 120px;">
+             <main id="mainArea">
+                <h3 style="text-align: center;margin-bottom: 20px;">欢迎来到法律小助手</h3>
+                <form action="/law/index/index/show" method="get" accept-charset="utf-8">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="请输入关键词" name="input" id="input">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit" id="queryBtn">查询</button>
+                        </span>
                     </div>
-                    <hr style="border : 1px dashed #ccc;" />
+                </form>
+                <div style="width: 100%;padding:20px 0;margin:50px auto 0;border:0px solid #ccc;">
+                     <h2 style="text-align: center;font-size: 1.2em;font-weight: bolder;color: black;padding: 10px;">国家法律法规</h2>
+                     <hr style="border : 1px dashed #ccc;" />
+                    {volist name="list" id="law" key="k"}
+                    <div style="width: 100%;margin:0 auto">
+                        <div style="width: 100%;text-align: center;padding-top: 5px;">
+                            <a href="/law/index/index/descript?lawName={$law->law_title}">{$law->law_title}</a>
+                        </div>
+                        <hr style="border : 1px dashed #ccc;margin-top: 0;margin-bottom: 0;" />
+                    </div>
+                    {/volist}
+                    <span style="float: right;"><a style="color: black" href="/law/index/index/more">更多...</a></span>
                 </div>
-                {/volist}
-                <span style="float: right;"><a style="color: black" href="/law/index/index/more">更多...</a></span>
-            </div>
-        </main>
-        <!-- <footer>
-            Copyright © 2017 law.com All Rights Reserved
-        </footer> -->
-         <script src='/law/public/static/js/util.js'></script>
+            </main>
+         </div>
+    </div>
+    <script src='/law/public/static/js/util.js'></script>
 </body>
 </html>

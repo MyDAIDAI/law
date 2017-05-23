@@ -21,5 +21,20 @@ return [
         'model'      => ['user', 'UserType'],
         'view'       => ['user/user'],
     ],
-    // 其他更多的模块定义
+    
+    'indexMobile'     => [
+        '__file__'   => ['common.php'],
+        '__dir__'    => ['behavior', 'controller', 'model', 'view'],
+        'controller' => ['Index'],
+        'model'      => ['Index'],
+        'view'       => ['index/index','index/descript','index/more','index/show'],
+    ],
+
+    'adminMobile'     => [
+        '__file__'   => ['common.php'],
+        '__dir__'    => ['behavior', 'controller', 'model', 'view'],
+        'controller' => ['Login','Main'],
+        'model'      => ['Admin','Law','User'],
+        'view'       => ['login/index','main/addUser','main/law','main/user'],
+    ],
 ];

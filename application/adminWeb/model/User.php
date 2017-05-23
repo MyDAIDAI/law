@@ -8,7 +8,7 @@ class User extends Model
 	protected $connection = [
 		'type'     => 'mysql',
 		'hostname' => '127.0.0.1',
-		'database' => 'xiuno4',
+		'database' => 'lawbbs',
 		'username' => 'root',
 		'password' => 'root',
 		'debug'    => true,
