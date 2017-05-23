@@ -13,6 +13,32 @@
                 width: 50%;
                 margin: 0 auto;
             }
+
+        div.search{
+            width: 100%;
+            margin: 0 auto;
+        }
+        div.search ul {
+            margin: 10px auto;
+            display: block;
+        }
+        div.search ul li{
+            position: relative;
+        }
+        div.search .search-input{
+            margin: 10px;
+        }
+        div.search .active::after{
+            width: 0;
+            height: 0;
+            border: 8px solid transparent;
+            border-top-color: #337ab7;
+            content: "";
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translate(-50%);
+        }
         @media screen and (max-device-width:750px){
             #mainArea{
                 width: 80%;
@@ -33,15 +59,27 @@
                 </nav>
             </header>
         </div>
-         <div class="row" style="margin-top: 120px;">
+         <div class="row" style="margin-top: 70px;">
              <main id="mainArea">
-                <h3 style="text-align: center;margin-bottom: 20px;">欢迎来到法律小助手</h3>
+                <h3 style="text-align: center;margin-bottom: 40px;">欢迎来到法律小助手</h3>
                 <form action="/law/index/index/show" method="get" accept-charset="utf-8">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="请输入关键词" name="input" id="input">
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary" type="submit" id="queryBtn">查询</button>
-                        </span>
+
+                    <div  class="search">
+                        <ul class="nav nav-pills">
+                            <li role="presentation" class="active"><a href="#">全部</a></li>
+                            <li role="presentation"><a href="#">发布单位</a></li>
+                            <li role="presentation"><a href="#">发布文号</a></li>
+                            <li role="presentation"><a href="#">发布日期</a></li>
+                            <li role="presentation"><a href="#">所属类别</a></li>
+                        </ul>
+                         <div class="search-input">
+                            <div class="input-group">
+                               <input type="text" class="form-control" placeholder="请输入关键词" name="input" id="input">
+                              <span class="input-group-btn">
+                                <button class="btn btn-primary" type="submit" id="queryBtn">查询</button>
+                              </span>
+                            </div><!-- /input-group -->
+                          </div><!-- /.col-lg-6 -->
                     </div>
                 </form>
                 <div style="width: 100%;padding:20px 0;margin:50px auto 0;border:0px solid #ccc;">
@@ -61,5 +99,20 @@
          </div>
     </div>
     <script src='/law/public/static/js/util.js'></script>
+    <script>
+        var tips = ['请输入关键词','请输入发布单位','请输入发布文号','请输入发布日期','请输入所属类别'];
+        var lis = document.getElementsByTagName('li');
+        var input = document.getElementsByTagName('input')[0];
+        list = Array.prototype.slice.call(lis);
+        list.forEach(function (li,i) {
+            li.addEventListener('click',function (event) {
+                for(var j = 0;j < lis.length;j++){
+                    lis[j].setAttribute('class','');
+                }
+                input.setAttribute('placeholder',tips[i]);
+                event.target.parentNode.setAttribute('class','active');
+            });
+        });
+    </script>
 </body>
 </html>
