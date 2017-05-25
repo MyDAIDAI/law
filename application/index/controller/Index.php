@@ -21,16 +21,37 @@ class Index extends Controller
     }
     public function show()
     {
-    	$value = $_GET['input'];
-        $list = IndexModel::where('law_title', 'like', '%'.$value.'%')->paginate(10);
+    	$value = $_GET['value'];
+        $key = $_GET['key'];
+
+        if($key == '法律法规'){
+            $list = IndexModel::where('law_title', 'like', '%'.$value.'%')->paginate(10);
+        }else if($key == '发布单位'){
+            $list = IndexModel::where('law_unit', 'like', '%'.$value.'%')->paginate(10);
+        }else if($key == '发布文号'){
+            $list = IndexModel::where('law_number', 'like', '%'.$value.'%')->paginate(10);
+        }else if($key == '发布日期'){
+            $list = IndexModel::where('law_show', 'like', '%'.$value.'%')->paginate(10);
+        }else{
+            $list = IndexModel::where('law_type', 'like', '%'.$value.'%')->paginate(10);
+        }
         if ($list) {
             $this->assign('list',$list);
-        }else{
         }
         $this->assign('value',$value);
         $this->assign('count',count($list));
         return $this->fetch();
+
+//        return [
+//            'code' => 'ok',
+//            'data' => [
+//                'list' => $list,
+//                'value' => $value,
+//                'count' => count($list),
+//            ]
+//        ];
     }
+
     public function descript()
     {
         $lawName = $_GET['lawName'];

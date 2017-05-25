@@ -62,11 +62,10 @@
          <div class="row" style="margin-top: 70px;">
              <main id="mainArea">
                 <h3 style="text-align: center;margin-bottom: 40px;">欢迎来到法律小助手</h3>
-                <form action="/law/index/index/show" method="get" accept-charset="utf-8">
 
                     <div  class="search">
                         <ul class="nav nav-pills">
-                            <li role="presentation" class="active"><a href="#">全部</a></li>
+                            <li role="presentation" class="active"><a href="#">法律法规</a></li>
                             <li role="presentation"><a href="#">发布单位</a></li>
                             <li role="presentation"><a href="#">发布文号</a></li>
                             <li role="presentation"><a href="#">发布日期</a></li>
@@ -76,12 +75,11 @@
                             <div class="input-group">
                                <input type="text" class="form-control" placeholder="请输入关键词" name="input" id="input">
                               <span class="input-group-btn">
-                                <button class="btn btn-primary" type="submit" id="queryBtn">查询</button>
+                                <button class="btn btn-primary"  id="queryBtn">查询</button>
                               </span>
                             </div><!-- /input-group -->
                           </div><!-- /.col-lg-6 -->
                     </div>
-                </form>
                 <div style="width: 100%;padding:20px 0;margin:50px auto 0;border:0px solid #ccc;">
                      <h2 style="text-align: center;font-size: 1.2em;font-weight: bolder;color: black;padding: 10px;">国家法律法规</h2>
                      <hr style="border : 1px dashed #ccc;" />
@@ -99,6 +97,7 @@
          </div>
     </div>
     <script src='/law/public/static/js/util.js'></script>
+    <script src='/law/public/static/js/jquery-3.2.1.js'></script>
     <script>
         var tips = ['请输入关键词','请输入发布单位','请输入发布文号','请输入发布日期','请输入所属类别'];
         var lis = document.getElementsByTagName('li');
@@ -112,6 +111,17 @@
                 input.setAttribute('placeholder',tips[i]);
                 event.target.parentNode.setAttribute('class','active');
             });
+        });
+
+        $('#queryBtn').on('click',function () {
+            var li = $(this).parent().parent().parent().prev().children();
+            var searchKey;
+            $.each(li,function (index, item) {
+                if($(item).hasClass('active')){
+                    searchKey = $(item).children().text();
+                }
+            });
+            location.href = '/law/index/index/show?key='+searchKey +'&value='+$("#input").val();
         });
     </script>
 </body>
