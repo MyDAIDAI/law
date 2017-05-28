@@ -14,6 +14,14 @@ class Index extends Controller
         $this->assign('list',$list);
     	return $this ->fetch();
     }
+    public function indexMobile()
+    {
+        $list = IndexModel::all(function ($query){
+            $query->where('law_id','>',1)->order('law_id','desc')->limit(5);
+        });
+        $this->assign('list',$list);
+        return $this ->fetch();
+    }
     public function more(){
         $list = IndexModel::paginate(10);
         $this->assign('list',$list);
@@ -42,14 +50,6 @@ class Index extends Controller
         $this->assign('count',count($list));
         return $this->fetch();
 
-//        return [
-//            'code' => 'ok',
-//            'data' => [
-//                'list' => $list,
-//                'value' => $value,
-//                'count' => count($list),
-//            ]
-//        ];
     }
 
     public function descript()
