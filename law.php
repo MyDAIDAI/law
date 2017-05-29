@@ -6,7 +6,7 @@
  * Time: 上午11:01
  */
 //数据库
-$servername = "localhost";
+$servername = "127.0.0.1";
 $username = "root";
 $password = "root";
 $dbname = "law";
