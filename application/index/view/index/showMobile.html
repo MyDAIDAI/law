@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Document</title>
+	<link rel="stylesheet" href="/law/public/static/css/api.css">
+	<link rel="stylesheet" href="/law/public/static/css/aui.css">
+	<style>
+		.aui-card-list-header, .aui-card-list-footer{
+			-webkit-justify-content:flex-start;
+			justify-content:flex-start;
+		}
+		#search{
+			padding-right: 10px;
+		}
+	</style>
+
+</head>
+<body>
+	<div class="aui-content" id="content">
+		<header class="aui-bar aui-bar-nav">
+			<a class="aui-pull-left aui-btn"  onclick="JavaScript:history.back(-1);">
+				<span class="aui-iconfont aui-icon-left"></span>返回
+			</a>
+			<div class="aui-title">法律小助手</div>
+		</header>
+
+		<div class="aui-searchbar" id="search">
+			<div class="aui-searchbar-input aui-border-radius" tapmode>
+				<i class="aui-iconfont aui-icon-search"></i>
+				<!--<form action="javascript:search();">-->
+					<input type="search" placeholder="请输入关键词" id="search-input">
+				<!--</form>-->
+			</div>
+			<div class="aui-searchbar-cancel" id="query" tapmode>查询</div>
+		</div>
+
+
+	</div>
+
+
+	<script src='/law/public/static/js/util.js'></script>
+	 <script src='/law/public/static/js/jquery-3.2.1.js'></script>
+	 <script>
+		 (function () {
+
+			 function getQueryVar(key) {
+				 var query = window.location.search.substring(1);
+				 var vars = query.split('&');
+				 for (var i = 0; i < vars.length; i++) {
+					 var pair = vars[i].split('=');
+					 if (decodeURIComponent(pair[0]) == key) {
+						 return decodeURIComponent(pair[1]);
+					 }
+				 }
+			 }
+			 $.ajax({
+				 type: "POST",
+				 url: "../index/showMobileAction",
+				 dataType: 'json',
+				 data:{
+					 value:getQueryVar('value')
+				 },
+				 cache: false,
+				 success: function (rep) {
+					 if (rep.code == "ok") {
+						 var law = rep.list.data;
+						 $.each(law,function (index,item) {
+							 var count = index + 1;
+							 $("#content").append('<section class="aui-content-padded">'
+									 +'<div class="aui-card-list">'
+									 +'<div class="aui-card-list-header">'
+									 +'<a style="font-size: 1em" href="/law/index/index/descriptMobile?lawName='+item.law_title+'">'+count +'、'+item.law_title+'</a>'
+									 +'</div>'
+									 +'<div class="aui-card-list-content-padded">'
+									 +'<span>'+item.law_unit+'</span>&nbsp;&nbsp;&nbsp;&nbsp;'
+									 +'<span>'+item.law_number+'</span>&nbsp;&nbsp;'
+									 +'<span>'+item.law_show+'</span>'
+									 +'<br>'
+									 +'<span>'+item.law_start+'</span>&nbsp;&nbsp;&nbsp;'
+									 +'<span>'+item.law_end+'</span>&nbsp;&nbsp;&nbsp;'
+									 +'<span>'+item.law_type+'</span>'
+									 +'</div>'
+									 +'</div>'
+									 +'</section>');
+						 });
+
+					 }
+				 }
+			 });
+			 document.getElementById("query").addEventListener('click',function () {
+				 $.ajax({
+					 type: "POST",
+					 url: "../index/showMobileAction",
+					 data:{
+						 value: $("#search-input").val()
+					 },
+					 dataType: 'json',
+					 cache: false,
+					 success: function (rep) {
+						 if (rep.code == "ok") {
+							 location.href = '/law/index/index/showMobile?value=' +$("#search-input").val() ;
+						 }
+					 }
+				 });
+
+
+			 });
+		 })();
+
+
+	 </script>
+</body>
+</html>

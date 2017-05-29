@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>法律小助手</title>
+    <link rel="stylesheet" href="/law/public/static/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="/law/public/static/bootstrap/css/bootstrap.css">
+    <!--<link rel="stylesheet" href="/law/public/static/css/api.css">-->
+    <!--<link rel="stylesheet" href="/law/public/static/css/aui.css">-->
+    <style>
+        #mainArea{
+                width: 50%;
+                margin: 0 auto;
+            }
+
+        div.search{
+            width: 100%;
+            margin: 0 auto;
+        }
+        div.search ul {
+            margin: 10px auto;
+            display: block;
+        }
+        div.search ul li{
+            position: relative;
+        }
+        div.search .search-input{
+            margin: 10px;
+        }
+        div.search .active::after{
+            width: 0;
+            height: 0;
+            border: 8px solid transparent;
+            border-top-color: #337ab7;
+            content: "";
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translate(-50%);
+        }
+        @media screen and (max-device-width:750px){
+            #mainArea{
+                width: 80%;
+            }
+        }
+    </style>
+
+</head>
+<body style="padding-top: 20px;">
+
+    <div class="container">
+        <div class="row">
+            <header style="padding: 10px;">
+                <nav>
+                    <!-- <a href="/law/index/" style="font-size: 1.6em">法律小助手</a></span> -->
+                    <a class="btn btn-success pull-right" href="/law/lawbbs">论坛</a>
+                </nav>
+            </header>
+        </div>
+         <div class="row" style="margin-top: 70px;">
+             <main id="mainArea">
+                <h3 style="text-align: center;margin-bottom: 40px;">欢迎来到法律小助手</h3>
+
+                    <div  class="search">
+                         <div class="search-input">
+                            <div class="input-group">
+                               <input type="text" class="form-control" placeholder="请输入关键词" name="input" id="input">
+                              <span class="input-group-btn">
+                                <button class="btn btn-primary"  id="query">查询</button>
+                              </span>
+                            </div><!-- /input-group -->
+                          </div><!-- /.col-lg-6 -->
+                    </div>
+                <div style="width: 100%;padding:20px 0;margin:20px auto 0;border:0px solid #ccc;">
+                     <h2 style="text-align: center;font-size: 1.2em;font-weight: bolder;color: black;padding: 10px;">国家法律法规</h2>
+                     <hr style="border : 1px dashed #ccc;" />
+                    {volist name="list" id="law" key="k"}
+                    <div style="width: 100%;margin:0 auto">
+                        <div style="width: 100%;text-align: center;padding-top: 5px;">
+                            <a href="/law/index/index/descriptMobile?lawName={$law->law_title}">{$law->law_title}</a>
+                        </div>
+                        <hr style="border : 1px dashed #ccc;margin-top: 0;margin-bottom: 0;" />
+                    </div>
+                    {/volist}
+                    <span style="float: right;"><a style="color: black" href="/law/index/index/moreMobile">更多...</a></span>
+                </div>
+            </main>
+         </div>
+    </div>
+    <script type="text/javascript" src='/law/public/static/js/util.js'></script>
+    <script type="text/javascript" src='/law/public/static/js/jquery-3.2.1.js'></script>
+    <script type="text/javascript" src='/law/public/static/js/api.js'></script>
+    <script type="text/javascript" src='/law/public/static/js/aui-dialog.js'></script>
+    <script type="text/javascript">
+
+        apiready = function () {
+            api.parseTapmode();
+        }
+        document.getElementById("query").addEventListener('click',function () {
+            var inputVal = $("#input").val().trim();
+
+            if(inputVal != ''){
+                $.ajax({
+                    type: "POST",
+                    url: "../index/showMobileAction",
+                    data:{
+                        value: $("#input").val()
+                    },
+                    dataType: 'json',
+                    cache: false,
+                    success: function (rep) {
+                        if (rep.code == "ok") {
+                            location.href = '/law/index/index/showMobile?value=' +$("#input").val();
+                        }
+                    }
+                });
+
+            }else {
+               alert("请输入查询关键词！");
+            }
+
+
+
+        });
+
+//        function openDialog() {
+//            var dialog = new auiDialog();
+//
+//            dialog.alert({
+//                title:"弹出提示",
+//                msg:'请输入查询内容',
+//                buttons:['关闭']
+//            },function(ret){
+//                console.log(ret)
+//            })
+//        }
+
+    </script>
+</body>
+</html>
