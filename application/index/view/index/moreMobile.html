@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Document</title>
+	<link rel="stylesheet" href="/law/public/static/css/api.css">
+	<link rel="stylesheet" href="/law/public/static/css/aui.css">
+
+	<style>
+		.aui-card-list-header, .aui-card-list-footer{
+			-webkit-justify-content:flex-start;
+			justify-content:flex-start;
+		}
+		.pagination{
+			list-style: none;
+			display: inline-block;
+			padding-left: 0;
+			margin: 20px 0;
+			border-radius: 4px;
+		}
+		.pagination > li{
+			list-style: none;
+			display: inline;
+		}
+		.pagination > li:first-child > a, .pagination > li:first-child > span{
+			margin-left: 0;
+			border-top-left-radius: 4px;
+			border-bottom-left-radius: 4px;
+		}
+		.pagination > li > a, .pagination > li > span{
+			 position: relative;
+			float: left;
+			padding: 6px 12px;
+			line-height: 1.42857143;
+			color:#337ab7 ;
+			text-decoration: none;
+			background-color: #fff;
+			border: 1px solid #ddd;
+		}
+		#search{
+			padding-right: 10px;
+		}
+	</style>
+
+</head>
+<body>
+
+<div class="aui-content" id="content">
+	<header class="aui-bar aui-bar-nav">
+		<a class="aui-pull-left aui-btn"  onclick="JavaScript:history.back(-1);">
+			<span class="aui-iconfont aui-icon-left"></span>返回
+		</a>
+		<div class="aui-title">法律小助手</div>
+	</header>
+
+	<div class="aui-searchbar" id="search">
+		<div class="aui-searchbar-input aui-border-radius" tapmode>
+			<i class="aui-iconfont aui-icon-search"></i>
+			<!--<form action="javascript:search();">-->
+			<input type="search" placeholder="请输入关键词" id="search-input">
+			<!--</form>-->
+		</div>
+		<div class="aui-searchbar-cancel" id="query" tapmode>查询</div>
+	</div>
+
+	{volist name="list" id="law" key="k"}
+	<section class="aui-content-padded">
+	<div class="aui-card-list">
+		<div class="aui-card-list-header">
+			<a style="font-size: 1em" href="/law/index/index/descriptMobile?lawName={$law->law_title}">{$k}、{$law->law_title}</a>
+			</div>
+		<div class="aui-card-list-content-padded">
+			<span>{$law->law_unit}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+			<span>{$law->law_number}</span>&nbsp;&nbsp;
+			<span>{$law->law_show}</span>
+			<br>
+			<span>{$law->law_start}</span>&nbsp;&nbsp;&nbsp;
+			<span>{$law->law_end}</span>&nbsp;&nbsp;&nbsp;
+			<span>{$law->law_type}</span>
+			</div>
+	</div>
+	</section>
+	{/volist}
+
+	<nav  style="width: 80%; margin: 10px auto">
+		<ul class="pagination">
+			<li>
+				<a href="#" aria-label="Previous" id="previous">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
+			</li>
+			<li><a href="/law/index/index/moreMobile">1</a></li>
+			<li><a href="/law/index/index/moreMobile?page=2">2</a></li>
+			<li><a href="/law/index/index/moreMobile?page=3">3</a></li>
+			<li><a href="/law/index/index/moreMobile?page=4">4</a></li>
+			<li><a href="/law/index/index/moreMobile?page=5">5</a></li>
+			<li>
+				<a href="#" aria-label="Next" id="next">
+					<span aria-hidden="true">&raquo;</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+
+</div>
+
+
+
+	<script src='/law/public/static/js/util.js'></script>
+	<script src='/law/public/static/js/jquery-3.2.1.js'></script>
+	<script>
+		(function () {
+			function getQueryVar(key) {
+				var query = window.location.search.substring(1);
+
+				var vars = query.split('&');
+				for (var i = 0; i < vars.length; i++) {
+					var pair = vars[i].split('=');
+					if (decodeURIComponent(pair[0]) == key) {
+						return decodeURIComponent(pair[1]);
+					}
+				}
+			}
+			$('#previous').on('click',function () {
+				var page = getQueryVar('page');
+				if(page == undefined){
+					alert("没有前一页咯!");
+				}else {
+					$(this).attr('href','/law/index/index/moreMobile?page=' + (Number(page) - 1));
+				}
+			});
+
+			$('#next').on('click',function () {
+				var page = getQueryVar('page');
+				if(page == undefined){
+					$(this).attr('href','/law/index/index/moreMobile?page=2' );
+				}else{
+					$(this).attr('href','/law/index/index/moreMobile?page=' + (Number(page) + 1));
+				}
+
+			});
+
+
+		})();
+	</script>
+</body>
+</html>

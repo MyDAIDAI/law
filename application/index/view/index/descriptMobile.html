@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Document</title>
+	<link rel="stylesheet" href="/law/public/static/css/api.css">
+	<link rel="stylesheet" href="/law/public/static/css/aui.css">
+	<style>
+		.aui-card-list-header, .aui-card-list-footer{
+			-webkit-justify-content:flex-start;
+			justify-content:flex-start;
+		}
+		#search{
+			padding-right: 10px;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="aui-content">
+		<header class="aui-bar aui-bar-nav">
+			<a class="aui-pull-left aui-btn"  onclick="JavaScript:history.back(-1);">
+				<span class="aui-iconfont aui-icon-left"></span>返回
+			</a>
+			<div class="aui-title">法律小助手</div>
+		</header>
+
+		<div class="aui-searchbar" id="search">
+			<div class="aui-searchbar-input aui-border-radius" tapmode>
+				<i class="aui-iconfont aui-icon-search"></i>
+				<input type="search" placeholder="请输入关键词" id="search-input">
+			</div>
+			<div class="aui-searchbar-cancel" id="query" tapmode>查询</div>
+		</div>
+
+		<div>
+			<div class="law-name" style="text-align: center;font-weight:bolder;font-size: 1.2em;margin-bottom: 10px;">
+				{$lawName}
+			</div>
+			<hr style="border : 1px dashed #ccc;" />
+			<div style="padding: 15px">
+				{$lawContent}
+			</div>
+		</div>
+	</div>
+
+
+	
+	<script src='/law/public/static/js/util.js'></script>
+	 <script src='/law/public/static/js/jquery-3.2.1.js'></script>
+	 <script>
+		 document.getElementById("query").addEventListener('click',function () {
+			 location.href = '/law/index/index/showMobile?&value='+$("#search-input").val();
+		 });
+	 </script>
+</body>
+</html>
