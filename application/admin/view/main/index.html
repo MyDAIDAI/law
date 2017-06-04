@@ -3,34 +3,383 @@
 <head>
     <meta charset="UTF-8">
     <title>法律小助手</title>
-      <link rel="stylesheet" href="/law/public/static/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/law/public/static/css/common.css">
-    <link rel="stylesheet" href="/law/public/static/css/admin.css">
+    <link rel="stylesheet" href="/law/public/static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/law/public/static/bootstrap/css/bootstrap.css">
+    <script src='/law/public/static/js/jquery-3.2.1.js'></script>
+    <script src="/law/public/static/js/bootstrap.min.js"></script>
+
 
 </head>
 <body>
-        <header>
-                       <span><a href="/law/index/" style="color: white">法律小助手</a></span>
 
-            <nav>
-                <label style="color: black">亲爱的,{$adminname}</label>
-                  <span style="margin-left: 10px;"><a href="/law/index/index/index">退出</a></span>
-            </nav>
-        </header>
-        <div class="main" style="background-color: transparent">
-            <aside>
-                <div style="padding: 20px 0;text-align: center;">系统管理</div>
-                <ul>
-                    <li><a href="/law/admin/main/user?adminname={$adminname}" title="">用户管理</a></li>
-                    <!--<li><a href="/law/admin/main/addUser?adminname={$adminname}" title="">添加用户</a></li>-->
-                    <li><a href="/law/admin/main/law?adminname={$adminname}" title="">法律管理</a></li>
-                    <!--<li><a href="/law/admin/main/addLaw?adminname={$adminname}" title="">添加法律</a></li>-->
+<div class="container">
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand " href="/law/index">法律小助手</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">首页</a></li>
+                    <!--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">管理 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="userManage">用户管理</a></li>
+                            <li><a href="#" id="lawManage">法律管理</a></li>
+                        </ul>
+                    </li>
                 </ul>
-            </aside>
-            <main style="background-color: transparent">
-                <h1 style="color: black;font-size: 2em">欢迎来到法律小助手</h1>
-            </main>
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="请输入查询关键字">
+                    </div>
+                    <button type="submit" class="btn btn-default">查询</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/law/lawbbs">论坛</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">管理员名 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">设置</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/law/admin/login/index">退出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="jumbotron">
+        <h1>Hello, world!</h1>
+        <p>请选择管理内容</p>
+        <p>或者，返回<a class="btn btn-primary btn-lg" href="#" role="button">首页</a></p>
+    </div>
+    <div class="row main-content" style="display: none;">
+        <button class="btn btn-success pull-right" id="add_user" data-toggle="modal"  data-target="#show_message">添加用户</button>
+        <table class="table table-striped">
+
+        </table>
+        <div id="page">
         </div>
-        <script src='/law/public/static/js/index.js'></script>
+    </div>
+    <div class="modal fade" id="show_message">
+        <div class="modal-dialog overlay-wrapper">
+            <div class="overlay" style="display: none">
+                <i class="fa fa-refresh fa-spin"></i>
+            </div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                    <h4 class="modal-title">用户信息</h4>
+                </div>
+                <div class="modal-body form-horizontal">
+                    <div class="form-group">
+                        <label for="username" class="col-md-3 control-label">用户名</label>
+                        <div class="col-md-7">
+                            <input type="text" class="form-control" id="username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="col-md-3 control-label">密码</label>
+                        <div class="col-md-7">
+                            <input type="password" class="form-control" id="userpass">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="#" class="col-md-3 control-label">用户邮箱</label>
+                        <div class="col-md-7">
+                            <input type="email" class="form-control" id="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="#" class="col-md-3 control-label">QQ</label>
+                        <div class="col-md-7">
+                            <input type="number" class="form-control" id="qq">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="#" class="col-md-3 control-label">联系电话</label>
+                        <div class="col-md-7">
+                            <input type="number" class="form-control" id="mobile">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="save">保存</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
+<script>
+    (function () {
+
+        //内容渲染
+        function userRender(rep,data,url) {
+             var thead = '<thead>'
+                         +'<th>用户名</th>'
+                         +'<th>邮箱</th>'
+                         +'<th>QQ</th>'
+                         +'<th>Mobile</th>'
+                         +'<th>操作</th>'
+                         +'</thead>';
+
+            var tr = '';
+            $.each(rep.list,function (index,item) {
+                tr += ' <tr>'
+                        +'<td>'+item.username+'</td>'
+                        +'<td>'+item.email+'</td>'
+                        +'<td>'+item.qq+'</td>'
+                        +'<td>'+item.mobile+'</td>'
+                        +'<td data-id="'+item.uid+'" data-name="user"><button class="btn btn-primary modifyBtn"  data-toggle="modal"  data-target="#show_message"" style="margin-right: 15px;">修改</button><button class="btn btn-danger deleteBtn">删除</button></td>'
+                        +'</tr>';
+
+            });
+            var tbody = '<tbody>'+tr+'</tbody>';
+            $('table').html(thead + tbody);
+
+            pageRender(rep.count,data.limit,data.page,url);
+            infoRender(data.page,data.limit,rep.count);
+        }
+
+        function lawRender(rep,data,url) {
+            var thead = '<thead>'
+                    +'<th>法律名称</th>'
+                    +'<th>法律类型</th>'
+                    +'<th>发布单位</th>'
+                    +'<th>生效日期</th>'
+                    +'<th>操作</th>'
+                    +'</thead>';
+
+            var tr = '';
+            $.each(rep.list,function (index,item) {
+                tr +=   ' <tr>'
+                        +'<td>'+(index + 1)+ '、' +item.law_title+'</td>'
+                        +'<td>'+(item.law_type).substr(6,(item.law_type).length)+'</td>'
+                        +'<td>'+(item.law_unit).substr(6,(item.law_unit).length)+'</td>'
+                        +'<td>'+(item.law_start).substr(6,(item.law_start).length)+'</td>'
+                        +'<td data-id="'+item.law_id+'" data-name="law"><a class="btn btn-primary" href="/law/admin/main/descript?id='+ item.law_id +'"  style="margin-right: 15px;">查看</a><button class="btn btn-danger deleteBtn">删除</button></td>'
+                        +'</tr>';
+
+            });
+            var tbody = '<tbody>'+tr+'</tbody>';
+
+            $('table').html(thead + tbody);
+            pageRender(rep.count,data.limit,data.page,url);
+            infoRender(data.page,data.limit,rep.count);
+        }
+
+        var currentPage = '';
+        var currentUrl = '';
+        function pageRender(count, limit, page,url) {
+
+            currentPage = page;
+            currentUrl = url;
+            var html = '';
+            var totalpage = Math.ceil(count / limit);
+            html += '<li class="paginate_button previous';
+            if (page == 1) {
+                html += ' disabled ';
+            }
+            html += '"><a href="#">上页</a></li>';
+            for (let i = 1; i <= totalpage; i++) {
+                html += '<li class="paginate_button number';
+                if (page == i) {
+                    html += ' active ';
+                }
+                html += '"><a href="#" >' + i + '</a></li>';
+            }
+            html += '<li class="paginate_button next';
+            if (page == totalpage) {
+                html += ' disabled ';
+            }
+            html += '"><a href="#">下页</a></li>';
+
+            $('#page').html(' <div id="search-count"></div>'
+                    + '<nav aria-label="Page navigation">'
+                    + '<ul class="pagination">'
+                    + html
+                    + '</ul>'
+                    + '</nav>');
+
+        }
+
+        $('#page').on('click','.previous',function () {
+            if (!$(this).hasClass('disabled')) {
+                if(currentUrl == '/law/admin/main/user'){
+                    requestAjax(currentUrl, {'limit': 10, 'page': currentPage - 1},userRender);
+                }else if(currentUrl == '/law/admin/main/law'){
+                    requestAjax(currentUrl, {'limit': 10, 'page': currentPage - 1},lawRender);
+                }
+
+            }
+        });
+
+        $('#page').on('click','.number',function () {
+            var num = $(this).find('a').html();
+
+            if(currentUrl == '/law/admin/main/user'){
+                requestAjax(currentUrl, {'limit': 10, 'page': num},userRender);
+            }else if(currentUrl == '/law/admin/main/law'){
+                requestAjax(currentUrl, {'limit': 10, 'page': num},lawRender);
+            }
+        });
+
+        $('#page').on('click','.next',function () {
+            if (!$(this).hasClass('disabled')) {
+                if(currentUrl == '/law/admin/main/user'){
+                    requestAjax(currentUrl, {'limit': 10, 'page': currentPage + 1},userRender);
+                }else if(currentUrl == '/law/admin/main/law'){
+                    requestAjax(currentUrl, {'limit': 10, 'page': currentPage + 1},lawRender);
+                }
+            }
+        });
+
+        function infoRender(page, limit, total) {
+            var end = page * limit;
+            var totalpage = Math.ceil(total / limit);
+            if (page == totalpage) {
+                end = total;
+            }
+            $('#search-count').html('显示 ' + ((page - 1) * limit + 1) + ' 到 ' + end + ' 项,共 ' + total + ' 项');
+        }
+
+        function requestAjax(url, data,callback) {
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                dataType: 'json',
+                data: data,
+                cache: false,
+                success: function (rep) {
+                    callback(rep, data,url);
+                }
+            });
+        }
+        $('#userManage').on('click',function () {
+            $(".jumbotron").hide();
+            $(".main-content").show();
+            requestAjax("/law/admin/main/user",{'limit':10,'page':1},userRender);
+        });
+
+        $('#lawManage').on('click',function () {
+            $(".jumbotron").hide();
+            $(".main-content").show();
+            requestAjax("/law/admin/main/law",{'limit':10,'page':1},lawRender);
+        });
+
+        //内容删除
+        $('table').on('click','.deleteBtn',function () {
+            var id = $(this).parent().attr('data-id');
+            var name = $(this).parent().attr('data-name');
+
+            if(name == 'law'){
+                requestAjax("/law/admin/main/deleteLaw",{'law_id':id},function () {
+                    alert("删除成功！");
+                    requestAjax("/law/admin/main/law",{'limit':10,'page':1},lawRender);
+                });
+            }else{
+                requestAjax("/law/admin/main/deleteLaw",{'user_id':id},function () {
+                    alert("删除成功！");
+                    requestAjax("/law/admin/main/user",{'limit':10,'page':1},userRender);
+                });
+            }
+        });
+
+        $('table').on('click', '.modifyBtn', function () {
+            $("#show_message").attr('data-kind','modify');
+
+            requestAjax("/law/admin/main/getUser",{'user_id':$(this).parent().attr('data-id')},function (rep) {
+                $("#show_message").attr('data-id',rep.data.uid);
+                $("#show_message").find('#username').val(rep.data.username);
+                $("#show_message").find('#userpass').val(rep.data.password);
+                $("#show_message").find('#email').val(rep.data.email);
+                $("#show_message").find('#qq').val(rep.data.qq);
+                $("#show_message").find('#mobile').val(rep.data.mobile);
+            });
+
+        });
+
+        $('#add_user').on('click',function () {
+            $("#show_message").attr('data-kind','add');
+            $("#show_message").find('#username').val('');
+            $("#show_message").find('#userpass').val('');
+            $("#show_message").find('#email').val('');
+            $("#show_message").find('#qq').val('');
+            $("#show_message").find('#mobile').val('');
+        });
+
+
+        $("#save").on('click', function () {
+
+            var action = $(this).parent().parent().parent().parent().attr('data-kind');
+            if(action == 'add'){
+                var user_name_add = $("#show_message").find('#username').val();
+                var user_pass_add = $("#show_message").find('#userpass').val();
+                var user_email_add = $("#show_message").find('#email').val();
+                var user_qq_add = $("#show_message").find('#qq').val();
+                var user_mobile_add = $("#show_message").find('#mobile').val();
+                requestAjax("/law/admin/main/addUser",
+                        {
+                            'user_name':user_name_add,
+                            'user_pass':user_pass_add,
+                            'user_email':user_email_add,
+                            'user_qq':user_qq_add,
+                            'user_mobile':user_mobile_add
+                        },
+                        function (rep) {
+                            if(rep.code == 'ok'){
+                                alert('添加成功!');
+                                requestAjax("/law/admin/main/user",{'limit':10,'page':1},userRender);
+                            }
+
+                        });
+            }else if(action == 'modify'){
+                var user_name_modify = $("#show_message").find('#username').val();
+                var user_pass_modify = $("#show_message").find('#userpass').val();
+                var user_email_modify = $("#show_message").find('#email').val();
+                var user_qq_modify = $("#show_message").find('#qq').val();
+                var user_mobile_modify = $("#show_message").find('#mobile').val();
+                var user_id_modify =  $(this).parent().parent().parent().parent().attr('data-id');
+
+                requestAjax("/law/admin/main/updateUser",
+                        {   'user_id':user_id_modify,
+                            'user_name':user_name_modify,
+                            'user_pass':user_pass_modify,
+                            'user_email':user_email_modify,
+                            'user_qq':user_qq_modify,
+                            'user_mobile':user_mobile_modify
+                        },
+                        function (rep) {
+                            if(rep.code == 'ok'){
+                                alert('修改成功!');
+                                requestAjax("/law/admin/main/user",{'limit':10,'page':1},userRender);
+                            }
+
+                        });
+
+            }
+
+        });
+
+
+
+
+    })();
+</script>
 </html>
