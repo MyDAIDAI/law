@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Document</title>
+	<!-- <link rel="stylesheet" type="text/css" href="/law/public/static/css/common.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="/law/public/static/css/show.css"> -->
+	<link rel="stylesheet" href="/law/public/static/bootstrap/css/bootstrap.css">
+	<style>
+		 #queryForm{
+                width: 50%;
+                margin: 0 auto;
+            }
+        @media screen and (max-device-width:750px){
+            #queryForm{
+                width: 80%;
+            }
+        }
+		 div.search{
+			 width: 60%;
+			 margin-top:-50px ;
+			 margin-bottom: 30px;
+		 }
+		 div.search ul {
+			 margin: 10px auto;
+			 display: block;
+		 }
+		 div.search ul li{
+			 position: relative;
+		 }
+		 div.search .search-input{
+			 margin: 10px;
+		 }
+		 div.search .active::after{
+			 width: 0;
+			 height: 0;
+			 border: 8px solid transparent;
+			 border-top-color: #337ab7;
+			 content: "";
+			 position: absolute;
+			 top: 40px;
+			 left: 50%;
+			 transform: translate(-50%);
+		 }
+		 @media screen and (max-device-width:750px){
+			 #mainArea{
+				 width: 80%;
+			 }
+		 }
+	</style>
+</head>
+<body>
+
+	 <div class="container">
+        <div class="row">
+            <header style="padding: 10px;">
+                <nav>
+                    <a href="/law/index/" style="font-size: 1.6em;margin-right: 20px;" class="pull-left">法律小助手</a></span>
+
+                    <a style="margin-left: 20px;" class="pull-right btn btn-primary" onclick="JavaScript:history.back(-1);">返回</a>
+                    <a class="btn btn-success pull-right" href="/law/lawbbs">论坛</a>
+                </nav>
+            </header>
+        </div>
+        <div class="row">
+        	<main style="color: black;height: auto;padding:50px 30px;margin-top: 25px;">
+			    <div style="margin-top: 80px;">
+				    <div class="law-name" style="text-align: center;font-weight:bolder;font-size: 1.4em;margin-bottom: 10px;">
+				    	{$lawName}
+				    </div>
+				    <!-- <div class="law-descript">
+						<span>[发布单位]:{$lawUnit}</span>
+				    	<span>[发布文号]:{$lawNumber}</span>
+				    	<span>[发布日期]:{$lawDate}</span>
+				    	<span>[生效日期]:{$lawRelease}</span>
+				    	<span>[失效日期]:{$lawEnd}</span>
+				    	<span>[所属类别]:{$lawType}</span>
+				    </div> -->
+				    <hr style="border : 1px dashed #ccc;" />
+				    <div class="law-content">
+				    	{$lawContent}
+				    </div>
+			    </div>
+			</main>
+        </div>
+         
+    </div>
+</body>
+</html>
